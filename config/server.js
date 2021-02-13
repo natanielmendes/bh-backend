@@ -1,6 +1,22 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
+
+let mongoMemoryServerConfig = {
+    instance: {
+        dbName: "events"
+    }
+}
+const mongod = new MongoMemoryServer(mongoMemoryServerConfig).getUri().then((uri) => {
+    const mongooseOpts = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    };
+    
+    mongoose.connect(uri, mongooseOpts);
+});
 
 const eventRoutes = require('../src/routes/event');
 
