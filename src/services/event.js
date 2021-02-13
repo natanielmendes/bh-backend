@@ -5,9 +5,40 @@ const eventModel = require('../models/event');
  * @param {Object} event event object to create.
  * @throws {Error} If the event object is not provided.
  */
-module.exports.create = async (event) => {
+create = async (event) => {
     if (!event)
         throw new Error('Missing event data');
 
-    await eventModel.create(event);
+    let result = await eventModel.create(event); 
+    
+    return result;
+}
+
+/**
+ * Retrieves all events.
+*/
+findAll = async () => {
+    const event = await eventModel.find({}, (err, events) => {
+        console.log(events)
+        if(err) {
+            console.log(err)
+        }
+        return events;
+    });
+    return event;
+};
+
+/**
+ * Retrieves an event by id.
+ * @param {String} id Event unique identifier
+*/
+getById = async (id) => {
+    const event = await eventModel.findById(id);
+    return event;
+};
+
+module.exports = {
+    create,
+    findAll,
+    getById
 }
