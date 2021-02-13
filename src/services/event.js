@@ -9,7 +9,9 @@ create = async (event) => {
     if (!event)
         throw new Error('Missing event data');
 
-    let result = await eventModel.create(event); 
+    let result = await eventModel.create(event).catch((error) => {
+        throw error;
+    })
     
     return result;
 }
