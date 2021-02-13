@@ -1,15 +1,18 @@
-const port = 3000;
-
 const bodyParser = require('body-parser');
 const express = require('express');
-const server = express();
+const app = express();
 
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+const eventRoutes = require('../src/routes/event');
 
-server.listen(process.env.PORT || port, () => {
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(eventRoutes);
+
+const port = 3000;
+app.listen(process.env.PORT || port, () => {
     let usedPort = process.env.PORT === undefined ? port : process.env.PORT;
     console.log('Server listening on ' + usedPort + ' port!');
 });
 
-module.exports = server;
+module.exports = app;
