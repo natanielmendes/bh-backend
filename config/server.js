@@ -7,7 +7,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let mongoMemoryServerConfig = {
     instance: {
-        dbName: "events"
+        dbName: "events-dev"
     }
 }
 const mongod = new MongoMemoryServer(mongoMemoryServerConfig).getUri().then((uri) => {
