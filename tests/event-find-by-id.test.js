@@ -51,7 +51,9 @@ describe('event getById ', () => {
     it('should retrieve correct event if id matches', async () => {
         const foundEvent = await eventService.getById(eventNatanielId);
         expect(foundEvent.id).toBe(eventNatanielId);
-        expect(foundEvent.name).toBe(eventNataniel.name);
+        expect(foundEvent.email).toBe(eventNataniel.email);
+        expect(foundEvent.lastName).toBe(eventNataniel.lastName);
+        expect(foundEvent.firstName).toBe(eventNataniel.firstName);
     });
 });
 
