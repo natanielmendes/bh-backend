@@ -33,9 +33,9 @@ describe('event findAll ', () => {
      * Should return null if findAll doesn't find any event with the provided id.
      */
     it('should return null if nothing is found', async () => {
-        await expect(eventService.findAll(mongoose.Types.ObjectId()))
+        await expect(eventService.findAll())
             .resolves
-            .toBeNull();
+            .toHaveLength(0)
     });
 
     /**
@@ -46,7 +46,7 @@ describe('event findAll ', () => {
         const foundEvents = await eventService.findAll();
         expect(foundEvents[0].id).toBe(eventNatanielId);
         expect(foundEvents[0].firstName).toBe(eventNataniel.firstName);
-        expect(foundEvents[1].id).toBe(eventNatanielId);
+        expect(foundEvents[1].id).toBe(eventBrainhubId);
         expect(foundEvents[1].lastName).toBe(eventBrainhub.lastName);
     });
 });
@@ -54,14 +54,15 @@ describe('event findAll ', () => {
 /**
  * Seed the database with events.
  */
-const createEvents = async () => {
-    const createdIphone = await eventModel.create(eventNataniel);
-    eventNatanielId = createdIphone.id;
-    await eventModel.create(eventBrainhub);
-};
-
 let eventNatanielId;
+let eventBrainhubId;
 
+const  eventBrainhub = {
+    firstName: 'Brain',
+    lastName: 'Hub',
+    email: 'brain@hub.pl',
+    eventDate: new Date
+};
 const eventNataniel = {
     firstName: 'Nataniel',
     lastName: 'Mendes',
@@ -69,9 +70,9 @@ const eventNataniel = {
     eventDate: new Date
 };
 
-const eventBrainhub = {
-    firstName: 'Brain',
-    lastName: 'Hub',
-    email: 'brain@hub.pl',
-    eventDate: new Date
+const createEvents = async () => {
+    const eventNatanielResponse = await eventModel.create(eventNataniel)
+    eventNatanielId = eventNatanielResponse.id;
+    const eventBrainhubResponse = await eventModel.create(eventBrainhub);
+    eventBrainhubId = eventBrainhubResponse.id;
 };

@@ -60,12 +60,6 @@ describe('event getById ', () => {
 /**
  * Seed the database with events.
  */
-const createEvents = async () => {
-    const createdIphone = await eventModel.create(eventNataniel);
-    eventNatanielId = createdIphone.id;
-    await eventModel.create(eventBrainhub);
-};
-
 let eventNatanielId;
 
 const eventNataniel = {
@@ -80,4 +74,10 @@ const eventBrainhub = {
     lastName: 'Hub',
     email: 'brain@hub.pl',
     eventDate: new Date
+};
+
+const createEvents = async () => {
+    const eventNatanielResponse = await eventModel.create(eventNataniel);
+    eventNatanielId = eventNatanielResponse.id;
+    await eventModel.create(eventBrainhub);
 };
