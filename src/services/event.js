@@ -21,7 +21,6 @@ create = async (event) => {
 */
 findAll = async () => {
     const event = await eventModel.find({}, (err, events) => {
-        console.log(events)
         if(err) {
             console.log(err)
         }
