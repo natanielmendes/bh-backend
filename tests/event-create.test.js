@@ -100,4 +100,18 @@ describe('event ', () => {
             .toThrow(mongoose.Error.ValidationError)
     });
 
+    /**
+     * Tests that a missing eventDate event CANNOT be created through the eventService without throwing any errors.
+     */
+    it('throw error when event date is missing', async () => {
+        const missingEmailEvent = {
+            firstName: 'Nataniel',
+            email: 'user@mail.pl',
+            lastName: 'Mendes'
+        };
+        expect(async () => await eventService.create(missingEmailEvent))
+            .rejects
+            .toThrow(mongoose.Error.ValidationError)
+    });
+
 });
