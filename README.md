@@ -97,7 +97,8 @@ Content-Type : application/json
 ]
 ```
 
-## What could be set as requirements for upcoming releases (0.0.2 version)
+## What could be set as requirements for an upcoming release (0.0.2 version)
 * Testing status codes coming from API calls. As other than 200 status code responses, only 400 is returned when badly creating an event, so it's not required yet, at least not for free :)
 * findById() is published as API GET /event/:id (0.0.1 version is not loading specific events)
 * update() is published as API PUT /event/:id (0.0.1 version is not updating events)
+* Implement pagination in GET /event/ API call
